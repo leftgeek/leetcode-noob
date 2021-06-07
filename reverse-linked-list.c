@@ -13,7 +13,7 @@ https://leetcode-cn.com/problems/reverse-linked-list/
  * };
  */
 
-
+//solution 1:
 struct ListNode* reverseList(struct ListNode* head){
     if (!head || !head->next){
         return head;
@@ -28,4 +28,17 @@ struct ListNode* reverseList(struct ListNode* head){
         curr_node = next_node;
     }
     return head;
+}
+
+//solution 2:
+struct ListNode* reverseList_recursive(struct ListNode* head){
+    if (!head || !head->next){
+        return head;
+    }
+    //假定head->next到tail的已经被反转
+    //返回末尾的tail
+    struct ListNode *tail = reverseList_recursive(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return tail;
 }
